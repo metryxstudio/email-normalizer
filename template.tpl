@@ -15,7 +15,8 @@ ___INFO___
   "displayName": "Email Address Normalizer",
   "description": "Normalizes email addresses for server-side tracking by converting to lowercase, trimming whitespace, and applying Gmail-specific rules (dots, plus addressing).",
   "containerContexts": [
-    "SERVER"
+    "SERVER",
+    "WEB"
   ],
   "categories": ["UTILITY"],
   "brand": {
@@ -83,6 +84,61 @@ var normalizeEmail = function(data) {
 };
 
 return normalizeEmail(data);
+
+
+___SANDBOXED_JS_FOR_WEB_TEMPLATE___
+
+var makeString = require('makeString');
+
+var normalizeEmail = function(data) {
+  var rawEmail = data.rawEmail;
+
+  if (!rawEmail) {
+    return undefined;
+  }
+
+  var emailString = makeString(rawEmail).trim().toLowerCase();
+  
+  if (emailString.length === 0) {
+    return undefined;
+  }
+  
+  var atIndex = emailString.indexOf('@');
+  if (atIndex <= 0 || atIndex === emailString.length - 1) {
+    return undefined;
+  }
+  
+  var domain = emailString.substring(atIndex + 1);
+  
+  if (domain === 'gmail.com' || domain === 'googlemail.com') {
+    var localPart = emailString.substring(0, atIndex);
+    
+    var plusIndex = localPart.indexOf('+');
+    if (plusIndex !== -1) {
+      localPart = localPart.substring(0, plusIndex);
+    }
+    
+    var normalizedLocal = '';
+    for (var i = 0; i < localPart.length; i++) {
+      var char = localPart.charAt(i);
+      if (char !== '.') {
+        normalizedLocal = normalizedLocal + char;
+      }
+    }
+    
+    return normalizedLocal + '@gmail.com';
+  }
+  
+  return emailString;
+};
+
+return normalizeEmail(data);
+
+
+
+___WEB_PERMISSIONS___
+
+[]
 
 
 ___SERVER_PERMISSIONS___

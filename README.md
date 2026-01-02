@@ -1,6 +1,6 @@
 # Email Address Normalizer
 
-A server-side Google Tag Manager variable template that normalizes email addresses for server-side tracking by converting to lowercase, trimming whitespace, and applying Gmail-specific rules.
+A Google Tag Manager variable template for both web and server containers that normalizes email addresses for server-side tracking by converting to lowercase, trimming whitespace, and applying Gmail-specific rules.
 
 ## Overview
 
@@ -8,7 +8,7 @@ This template prepares email addresses for hashing and sending to advertising pl
 
 ## Installation
 
-1. In your server-side GTM container, go to **Templates** → **Variable Templates** → **Search Gallery**
+1. In your GTM container (web or server-side), go to **Templates** → **Variable Templates** → **Search Gallery**
 2. Search for "Email Address Normalizer"
 3. Click **Add to workspace**
 
@@ -57,6 +57,12 @@ Normalizing ensures consistent hashing for user matching across platforms.
 1. Create a variable using this template
 2. Set **Raw Email Address** to your email data source (e.g., `{{Event Data - email}}`)
 3. Use the normalized output in your tracking tags or hash it for CAPI
+
+## Compatibility
+
+This template works in both:
+- **Web GTM** containers
+- **Server-side GTM** containers
 
 ## Author
 
