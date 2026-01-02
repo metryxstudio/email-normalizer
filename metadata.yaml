@@ -1,5 +1,5 @@
 homepage: "https://github.com/metryxstudio/email-normalizer"
 documentation: "https://github.com/metryxstudio/email-normalizer#readme"
 versions:
-  - sha: # Add your commit SHA after pushing to GitHub
+  - sha: 00cb017946a8df9468d78ea78e2b3a7225ce9e9c
     changeNotes: "Initial release"
